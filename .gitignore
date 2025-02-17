@@ -31,5 +31,4 @@ UR5e/TwinManager/target
 UR5e/controller/rmqfmu_old
 UR5e/controller/rmqfmu.fmu
 UR5e/controller/consumer_rmq.py
-UR5e/TwinManager/data/output_HiL/*
-UR5e/TwinManager/data/output_simulation/*
+
