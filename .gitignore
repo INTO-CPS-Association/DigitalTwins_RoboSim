@@ -20,4 +20,16 @@ UR5e_archive
 tests_archive
 videos_archive
 comparison_implementations_robotics
+UR5e/experiments/plots
 
+
+## Specific to the use of the TwinManager
+UR5e/TwinManager/venv
+UR5e/TwinManager/venv/*
+UR5e/TwinManager/test.log
+UR5e/TwinManager/target
+UR5e/controller/rmqfmu_old
+UR5e/controller/rmqfmu.fmu
+UR5e/controller/consumer_rmq.py
+UR5e/TwinManager/data/output_HiL/*
+UR5e/TwinManager/data/output_simulation/*

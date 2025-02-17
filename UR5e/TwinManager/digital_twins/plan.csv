@@ -1,0 +1,6 @@
+timestep,moveDiscreteCommand,MovementArgs_target_X,MovementArgs_target_Y,MovementArgs_target_Z,closeGripperCommand,openGripperCommand
+0,false,0,0,0,false,false
+1000,true,0,23,1,false,false
+5500,true,3,20,2,false,false
+8000,true,8,10,0,false,false
+15000,true,1,13,0,false,false

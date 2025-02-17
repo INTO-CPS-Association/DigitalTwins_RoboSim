@@ -30,7 +30,7 @@ Some of the tools this approach relies on include:
 3. [RabbitMQFMU](https://github.com/INTO-CPS-Association/fmu-rabbitmq).
 4. [Maestro](https://github.com/INTO-CPS-Association/maestro).
 5. [FMI Standard and headers](https://github.com/modelica/fmi-standard).
-
+6. [TwinManager](https://github.com/sagilar/TwinManager).
 
 
 ## Implementation for the UR5e/UR3e
@@ -73,6 +73,26 @@ In this script, you can update the value of the variables ```using_rmqfmu=false`
 To stop the co-simulation and background services, use the script ```terminate.sh```.
 
 The output of experiments is generated to the folder ```URxe/co-simulation/results``` by default (this path can be updated in the ```URxe/co-simulation/cosimulation_execution.sh``` file).
+
+### Integration with the TwinManager
+The resulting co-simulation artifacts can be integrated in a Digital Twin-enabled system with the [TwinManager](https://github.com/sagilar/TwinManager) to set up the Digital Twin application and services.
+We have created a prototypical application for the UR5e Digital Twin-enabled system with RoboSim in [TwinManager for the UR5e](UR5e/TwinManager/).
+
+This application runs based on a test for a 20 second co-simulation (on both physical and digital twins). The logic for this application is available in [UR5eRoboSim.java](UR5e/TwinManager/UR5eRoboSim.java).
+The execution depends on other files, which are bound to the application, as [configuration files](UR5e/TwinManager/digital_twins/), [twin schema](UR5e/TwinManager/models/ur5e.aasx), and the existing FMUs and co-simulation parameters previously completed in [UR5e co-simulation](UR5e/co-simulation/).
+
+The test commands can be executed either using an [external RabbitMQ publisher](UR5e/controller/routine_prosumer.py) or a service for planning available in the prototypical application (the planning service uses [this csv file as input](UR5e/TwinManager/digital_twins/plan.csv), based on co-simulation timesteps).
+Both implementations have the same behavior, and both are threaded to run the co-simulations for the Digital Twin (with CoppeliaSim) and for the real UR5e with hardware-in-the-loop (with the URInterface). These co-simulations use RabbitMQFMU to enable the bidirectional messaging from and to the co-simulations.
+
+To execute the application, use [this script](UR5e/TwinManager/execute_twinmanager.sh) by changing the TwinManager jar path, as follows:
+```
+cd UR5e/TwinManager
+./execute_twinmanager.sh
+```
+Notice that the execution also requires the endpoints to be up and running, the TwinManager jar, the installed dependencies in the Python virtual environment, and a valid RabbitMQ broker.
+
+The resulting data from the co-simulations using the TwinManager are output in [this folder](UR5e/TwinManager/data/).
+
 
 ## Templates
 We provide templates based on the provided methodology in our paper (see [Cite this work](#cite-this-work)) in the [templates folder](templates/).

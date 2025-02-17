@@ -1,6 +1,6 @@
 {
     "fmus": {
-        "{rmqfmu}": "../controller/rmqfmu.fmu",
+        "{rmqfmu}": "../controller/rmqfmu_dt.fmu",
         "{mapping}": "../mappingFMU/mappingFMU_CoppeliaSim.fmu",
         "{dmodel}": "../../dmodelFMU/dmodelFMU.fmu"
     },
@@ -56,6 +56,8 @@
         ]
     },
     "parameters": {
+        "{rmqfmu}.rmqfmu.config.queueupperbound" : 200,
+        "{rmqfmu}.rmqfmu.config.maxage" : 2000
     },
     "connections": {
         "{rmqfmu}.rmqfmu.closeGripperCommand" : ["{dmodel}.dmodel.closeGripperCommand"],
@@ -105,7 +107,13 @@
         "{dmodel}.dmodel.target_ry" : ["{mapping}.mapping.target_ry"],
         "{dmodel}.dmodel.target_rz" : ["{mapping}.mapping.target_rz"],
         "{dmodel}.dmodel.setvelocity" : ["{mapping}.mapping.setvelocity"],
-        "{dmodel}.dmodel.target_v" : ["{mapping}.mapping.target_v"]
+        "{dmodel}.dmodel.target_v" : ["{mapping}.mapping.target_v"],
+        "{mapping}.mapping.q0" : ["{rmqfmu}.rmqfmu.q0"],
+        "{mapping}.mapping.q1" : ["{rmqfmu}.rmqfmu.q1"],
+        "{mapping}.mapping.q2" : ["{rmqfmu}.rmqfmu.q2"],
+        "{mapping}.mapping.q3" : ["{rmqfmu}.rmqfmu.q3"],
+        "{mapping}.mapping.q4" : ["{rmqfmu}.rmqfmu.q4"],
+        "{mapping}.mapping.q5" : ["{rmqfmu}.rmqfmu.q5"]
     },
     "algorithm": {
         "size": 0.5,
@@ -116,5 +124,16 @@
     "reportProgress": true,
     "liveLogInterval": 0,
     "logLevels": {},
-    "loggingOn": true
+    "loggingOn": false,
+    "rabbitmq": {
+        "ip" : "localhost",
+        "port" : 5672,
+        "username" : "",
+        "password" : "",
+        "exchange" : "fmi_digital_twin_dt",
+        "type" : "topic",
+        "vhost" : "/",
+        "routing_key_from_cosim": "data.from_cosim",
+        "routing_key_to_cosim": "data.to_cosim"
+    }
 }

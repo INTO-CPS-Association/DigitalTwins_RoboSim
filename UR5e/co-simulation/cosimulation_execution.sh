@@ -7,8 +7,8 @@ maestro_path=/home/au698550/installs/Maestro # Change path accordingly
 output_path=results # Change accordingly
 maestro_jar=maestro-2.4.1-jar-with-dependencies.jar # Change path accordingly
 rmq_publisher=../controller/publisher_rmq.py
-using_rmqfmu=false # Update for using rmqfmu
-using_simulation=true # Update for using real robot or simulation
+using_rmqfmu=true # Update for using rmqfmu
+using_simulation=false # Update for using real robot or simulation
 
 if [ "$using_rmqfmu" = true ] && [ "$using_simulation" = true ]; then
 	java -jar $maestro_path/$maestro_jar import sg1 multimodel_CoppeliaSim.json -output generate

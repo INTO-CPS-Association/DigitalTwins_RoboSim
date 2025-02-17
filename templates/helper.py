@@ -102,6 +102,18 @@ vars_log_pmFMU["rz"] = "Real"
 
 vars_log_pmFMU_list = list(vars_log_pmFMU)
 
+# For RabbitMQ FMU: write down which variables are to be logged from the co-simulation via RMQFMU (connected to the pmFMU)
+
+vars_log_RMQFMU = {}
+vars_log_RMQFMU["q0"] = "Real"
+vars_log_RMQFMU["q1"] = "Real"
+vars_log_RMQFMU["q2"] = "Real"
+vars_log_RMQFMU["q3"] = "Real"
+vars_log_RMQFMU["q4"] = "Real"
+vars_log_RMQFMU["q5"] = "Real"
+
+vars_log_RMQFMU_list = list(vars_log_RMQFMU)
+
 def create_mappingfmu_skeleton():
 
     print("*** (MappingFMU - model.py) For def __init__***")
@@ -477,7 +489,7 @@ def set_write_output_interface():
     print(final_write_output_structure.format(robosim_module_name))
 
 
-def create_controllerfmu_mdxml():
+def create_controllerfmu_mdxml(rmqfmu=False):
     print("*** For modeldescription.xml in controllerFMU (also valid for RMQFMU) ***")
     # modeldescription.xml helper
 
@@ -486,18 +498,45 @@ def create_controllerfmu_mdxml():
     print('***** ModelDescription.xml - ModelVariables *****')
     print(variables_init)
     idx = 1
-    for k,v in vars.items():
-        if k in vars_controller:
-            if v[0] == "Boolean":
-                print(text_boolean_output.format(k,str(vars_list.index(k))))
-            elif v[0] == "Real":
-                print(text_real_output.format(k,str(vars_list.index(k))))
-            elif v[0] == "Integer":
-                print(text_integer_output.format(k,str(vars_list.index(k))))
-            elif v[0] == "String":
-                print(text_output.format(k,str(vars_list.index(k))))
-            result_output_structure = result_output_structure + structure_output.format(idx) + "\n"
-            idx += 1
+    if not rmqfmu:
+        for k,v in vars.items():
+            if k in vars_controller:
+                if v[0] == "Boolean":
+                    print(text_boolean_output.format(k,str(vars_list.index(k))))
+                elif v[0] == "Real":
+                    print(text_real_output.format(k,str(vars_list.index(k))))
+                elif v[0] == "Integer":
+                    print(text_integer_output.format(k,str(vars_list.index(k))))
+                elif v[0] == "String":
+                    print(text_output.format(k,str(vars_list.index(k))))
+                result_output_structure = result_output_structure + structure_output.format(idx) + "\n"
+                idx += 1
+    if rmqfmu:
+        iter = 0
+        for k,v in vars.items():
+            if k in vars_controller:
+                if v[0] == "Boolean":
+                    print(text_boolean_output.format(k,str(20+iter)))
+                elif v[0] == "Real":
+                    print(text_real_output.format(k,str(20+iter)))
+                elif v[0] == "Integer":
+                    print(text_integer_output.format(k,str(20+iter)))
+                elif v[0] == "String":
+                    print(text_output.format(k,str(20+iter)))
+                result_output_structure = result_output_structure + structure_output.format(idx) + "\n"
+                idx += 1
+                iter += 1
+        if len(vars_log_RMQFMU_list) > 0:
+            for k,v in vars_log_RMQFMU.items():
+                if v == "Boolean":
+                    print(text_boolean_input.format(k,str(20+vars_log_RMQFMU_list.index(k) + idx-1)))
+                elif v == "Real":
+                    print(text_real_input.format(k,str(20+vars_log_RMQFMU_list.index(k) + idx-1)))
+                elif v == "Integer":
+                    print(text_integer_input.format(k,str(20+vars_log_RMQFMU_list.index(k) + idx-1)))
+                elif v == "String":
+                    print(text_input.format(k,str(20+vars_log_RMQFMU_list.index(k) + idx-1)))
+
 
     # for inputs (optional)
     # for k,v in vars.items():
@@ -566,6 +605,7 @@ def create_connections(rmqfmu=False):
     print("*** For connections in Multimodel.json ***")
     struct_connections = ''
     controller_connections = ''
+    logging_connections = ''
     for k,v in vars.items():
         if "InputEvent" in v[1]:
             if k in vars_controller:
@@ -574,12 +614,16 @@ def create_connections(rmqfmu=False):
                 struct_connections += '"{{mapping}}.mapping.{}" : ["{{dmodel}}.dmodel.{}"],\n'.format(k,k)
         elif "Operation" in v[1]:
             struct_connections += '"{{dmodel}}.dmodel.{}" : ["{{mapping}}.mapping.{}"],\n'.format(k,k)
+    if rmqfmu:
+        for k,v in vars_log_RMQFMU.items():
+            logging_connections += '"{{mapping}}.mapping.{1}" : ["{{{0}}}.{0}.{1}"],\n'.format(controller_name,k)
     print(controller_connections[:-1])
-    print(struct_connections[:-2])
+    print(struct_connections[:-1])
+    print(logging_connections[:-2])
 
 if __name__=='__main__':
     print("Miscellaneous 1 - Step 5\n")
-    create_connections()
+    create_connections(rmqfmu=True)
     
     print("\n\n\n\nMiscellaneous 2 - Step 6\n")
     create_mappingfmu_mdxml()
@@ -609,7 +653,7 @@ if __name__=='__main__':
     create_controllerfmu_skeleton()
     
     print("\n\n\n\nMiscellaneous 11 - Step 13\n")
-    create_controllerfmu_mdxml()
+    create_controllerfmu_mdxml(rmqfmu=True)
     
     
     
