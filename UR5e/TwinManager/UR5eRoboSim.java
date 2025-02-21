@@ -22,9 +22,10 @@ public class UR5eRoboSim {
 	static boolean usingDT = true;
 	static boolean usingPT = true;
 	static double stepSize = 0.5;
-	static double monitoringFreq = 0.25;
+	static double monitoringFreq = 0.5;
 	static double plannerFreq = 0.5;
-	static int numberOfCycles = 200;
+	static double maxTime = 20.0;
+	static int numberOfCycles = 2000;
 
 	public static void main(String[] args) {
 		System.out.println("Executing UR5e RoboSim application with DT and PT (hardware-in-the-loop)");
@@ -89,7 +90,8 @@ public class UR5eRoboSim {
 			dtPlanner.bindSystem("ur5eDTSystem");
 		}
 		System.out.println("------------Starting plan execution---------------");
-		dtPlanner.systemExecute((int)(plannerFreq*1000));
+		//dtPlanner.systemExecute((int)(plannerFreq*1000)); // If synchronization between the execution and the planner is strictly needed
+		dtPlanner.systemExecuteAsync((int)(plannerFreq*1000), (int)(maxTime*1000));
 				
 		Thread monitoringThread = new Thread(() -> {
 			new Timer().scheduleAtFixedRate(new TimerTask() {
@@ -99,6 +101,7 @@ public class UR5eRoboSim {
 							int simstepMillis = Double.valueOf(twinManager.getAsyncAttribute("simstep").toString()).intValue();// Syncing clock -> simstep in millis
 							int clockInt = (int)(simstepMillis/(stepSize*1000));
 							Clock extClock = new Clock();
+							int previousStepMillis = (int)(dtPlanner.getClock().getNow() * 1000/stepSize);
 							extClock.setClock(clockInt);
 							twinManager.setClock(extClock);
 							dtPlanner.setClock(clockInt);

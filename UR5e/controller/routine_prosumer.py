@@ -251,6 +251,7 @@ class Publisher(object):
         #self._queue_inst = self._channel.queue
         #self._queue_inst.bind(queue=self.queue,exchange=self.exchange,routing_key=self.routing_key)
         self.simstep = 0.0
+        self.internal_sim_step = 0.0
 
     def close_connection(self):
         self._channel.close()
@@ -260,18 +261,20 @@ class Publisher(object):
         self.simstep = simstep
 
     def start(self):
-        while (self.simstep/1000.0)<=(self.max_time+self.step_size):
+        #while (self.internal_sim_step)<=(self.max_time+self.step_size): # This one works asynchronously
+        while (self.simstep/1000.0)<=(self.max_time+self.step_size): # This one ensures synchronization between RMQFMU and the publisher
             self.publish()
             time.sleep(self.step_size)
+            self.internal_sim_step += self.step_size
         
     def publish(self):
         dt=datetime.strptime('2019-01-04T16:41:24+0200', "%Y-%m-%dT%H:%M:%S%z")
-        sim_step_seconds = self.simstep/1000.0
+        sim_step_seconds = self.simstep/1000.0 # Synchronously
+        # sim_step_seconds = self.internal_sim_step # Asynchronously
         msg = {}
         msg['time']= dt.isoformat()    
 
         msg['time']= datetime.now(tz = datetime.now().astimezone().tzinfo).isoformat(timespec='milliseconds')
-        print("simstep: " + str(self.simstep) + " - In seconds: " + str(sim_step_seconds))
         #if (i==2):
         if (round(sim_step_seconds,1)> (1.0-self.step_size) and round(sim_step_seconds,1)<(1.0+self.step_size) or (sim_step_seconds==1.0)):
             msg['moveDiscreteCommand'] = True

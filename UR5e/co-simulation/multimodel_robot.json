@@ -123,6 +123,7 @@
     "liveLogInterval": 0,
     "logLevels": {},
     "loggingOn": true,
+    "simulationProgramDelay": true,
     "rabbitmq": {
         "ip" : "localhost",
         "port" : 5672,

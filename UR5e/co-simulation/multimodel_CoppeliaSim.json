@@ -30,19 +30,7 @@
           "qd2",
           "qd3",
           "qd4",
-          "qd5",
-          "qdd0",
-          "qdd1",
-          "qdd2",
-          "qdd3",
-          "qdd4",
-          "qdd5",
-          "t0",
-          "t1",
-          "t2",
-          "t3",
-          "t4",
-          "t5"
+          "qd5"
         ],
         "{dmodel}.dmodel": [
             "state",
@@ -56,9 +44,9 @@
         ]
     },
     "parameters": {
-        "{rmqfmu}.rmqfmu.config.queueupperbound" : 200,
-        "{rmqfmu}.rmqfmu.config.maxage" : 2000
-    },
+        "{rmqfmu}.rmqfmu.config.queueupperbound" : 300,
+        "{rmqfmu}.rmqfmu.config.maxage" : 1000
+        },
     "connections": {
         "{rmqfmu}.rmqfmu.closeGripperCommand" : ["{dmodel}.dmodel.closeGripperCommand"],
         "{rmqfmu}.rmqfmu.openGripperCommand" : ["{dmodel}.dmodel.openGripperCommand"],
@@ -121,10 +109,11 @@
     },
     "startTime": 0,
     "endTime": 20.0,
-    "reportProgress": true,
+    "reportProgress": false,
     "liveLogInterval": 0,
     "logLevels": {},
     "loggingOn": false,
+    "simulationProgramDelay": true,
     "rabbitmq": {
         "ip" : "localhost",
         "port" : 5672,
