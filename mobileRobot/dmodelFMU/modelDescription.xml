@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription
+  fmiVersion="2.0"
+  modelName="CacheConsM"
+  description="Controller software (d-model) for the CacheConsM"
+  generationTool="Reference FMUs (development build)"
+  guid="{1AE5E10D-9521-4DE3-80B9-D0EAAA7D5AF1}"
+  numberOfEventIndicators="1">
+
+  <CoSimulation
+    modelIdentifier="CacheConsM"
+    canHandleVariableCommunicationStepSize="true"
+    canNotUseMemoryManagementFunctions="true"
+    canGetAndSetFMUstate="true"
+    canSerializeFMUstate="true">
+    <SourceFiles>
+      	<File name="fmu.c" />
+	<File name="skeleton.c" />
+	<File name="adapted_C/CacheConsM.c" />
+    </SourceFiles>
+  </CoSimulation>
+
+  <LogCategories>
+    <Category name="logEvents" description="Log events"/>
+    <Category name="logStatusError" description="Log error messages"/>
+  </LogCategories>
+
+  <DefaultExperiment startTime="0" stopTime="3" stepSize="1e-2"/>
+
+  <ModelVariables>
+<ScalarVariable name="closestDistance" valueReference="0" causality="input" variability="discrete">
+      <Boolean start="false"/>
+    </ScalarVariable>
+<ScalarVariable name="closest_distance" valueReference="1" causality="input" variability="continuous">
+      <Real start="0.0" />
+    </ScalarVariable>
+<ScalarVariable name="closestAngle" valueReference="2" causality="input" variability="discrete">
+      <Boolean start="false"/>
+    </ScalarVariable>
+<ScalarVariable name="closest_angle" valueReference="3" causality="input" variability="continuous">
+      <Real start="0.0" />
+    </ScalarVariable>
+<ScalarVariable name="move" valueReference="4" causality="output" variability="discrete">
+      <Boolean />
+    </ScalarVariable>
+<ScalarVariable name="lv" valueReference="5" causality="output" variability="continuous">
+      <Real />
+    </ScalarVariable>
+<ScalarVariable name="av" valueReference="6" causality="output" variability="continuous">
+      <Real />
+    </ScalarVariable>
+<ScalarVariable name="state" valueReference="7" variability="discrete" causality="output">
+      <String />
+    </ScalarVariable>
+<ScalarVariable name="target_state" valueReference="8" variability="discrete" causality="output">
+      <String />
+    </ScalarVariable>
+<ScalarVariable name="status" valueReference="9" variability="discrete" causality="output">
+      <String />
+    </ScalarVariable>
+<ScalarVariable name="done" valueReference="10" causality="output" variability="discrete">
+      <Boolean />
+    </ScalarVariable>
+<ScalarVariable name="terminateSimulation" valueReference="11" causality="input" variability="discrete">
+      <Boolean start="false"/>
+    </ScalarVariable>
+</ModelVariables>
+  <ModelStructure>
+<Outputs>
+<Unknown index="5" />
+<Unknown index="6" />
+<Unknown index="7" />
+<Unknown index="8" />
+<Unknown index="9" />
+<Unknown index="10" />
+<Unknown index="11" />
+
+</Outputs>
+<InitialUnknowns>
+<Unknown index="5" />
+<Unknown index="6" />
+<Unknown index="7" />
+<Unknown index="8" />
+<Unknown index="9" />
+<Unknown index="10" />
+<Unknown index="11" />
+
+</InitialUnknowns>
+</ModelStructure>
+
+
+</fmiModelDescription>

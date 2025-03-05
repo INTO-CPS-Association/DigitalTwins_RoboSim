@@ -1,0 +1,15 @@
+[submodule "mobileRobot/turtlebot3_ws/src/DynamixelSDK"]
+	path = mobileRobot/turtlebot3_ws/src/DynamixelSDK
+	url = https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+[submodule "mobileRobot/turtlebot3_ws/src/tf_transformations"]
+	path = mobileRobot/turtlebot3_ws/src/tf_transformations
+	url = https://github.com/DLu/tf_transformations.git
+[submodule "mobileRobot/turtlebot3_ws/src/turtlebot3"]
+	path = mobileRobot/turtlebot3_ws/src/turtlebot3
+	url = https://github.com/ROBOTIS-GIT/turtlebot3.git
+[submodule "mobileRobot/turtlebot3_ws/src/turtlebot3_msgs"]
+	path = mobileRobot/turtlebot3_ws/src/turtlebot3_msgs
+	url = https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+[submodule "mobileRobot/turtlebot3_ws/src/turtlebot3_simulations"]
+	path = mobileRobot/turtlebot3_ws/src/turtlebot3_simulations
+	url = https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git

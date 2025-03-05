@@ -1,0 +1,46 @@
+{
+    "fmus": {
+        "{rmqfmu}": "../ControllerFMU/rmqfmu.fmu",
+        "{mapping}": "../MappingFMU/mappingFMU.fmu",
+        "{dmodel}": "../dmodelFMU/dmodelFMU.fmu"
+    },
+    "logVariables": {
+        "{mapping}.mapping": [
+          "closestDistance",
+          "closestAngle",
+          "closest_distance",
+          "closest_angle"
+        ],
+        "{dmodel}.dmodel": [
+            "state",
+            "target_state",
+            "status",
+            "done",
+            "Move",
+            "Move_Arg_0",
+            "Move_Arg_1"
+        ]
+    },
+    "parameters": {
+    },
+    "connections": {
+        "{rmqfmu}.rmqfmu.CCMove" : ["{dmodel}.dmodel.CCMove","{mapping}.mapping.CCMove"],
+        "{rmqfmu}.rmqfmu.lv" : ["{dmodel}.dmodel.lv","{mapping}.mapping.lv"],
+        "{rmqfmu}.rmqfmu.av" : ["{dmodel}.dmodel.av","{mapping}.mapping.av"],
+        "{rmqfmu}.rmqfmu.EnableClusterWatch" : ["{dmodel}.dmodel.EnableClusterWatch","{mapping}.mapping.EnableClusterWatch"],
+        "{rmqfmu}.rmqfmu.DisableClusterWatch" : ["{dmodel}.dmodel.DisableClusterWatch","{mapping}.mapping.DisableClusterWatch"],
+        "{rmqfmu}.rmqfmu.EnableVHF" : ["{dmodel}.dmodel.EnableVHF","{mapping}.mapping.EnableVHF"],
+        "{rmqfmu}.rmqfmu.DisableVHF" : ["{dmodel}.dmodel.DisableVHF","{mapping}.mapping.DisableVHF"],
+        "{mapping}.mapping.closestDistance" : ["{dmodel}.dmodel.closestDistance"],
+        "{mapping}.mapping.closest_distance" : ["{dmodel}.dmodel.closest_distance"],
+        "{mapping}.mapping.closestAngle" : ["{dmodel}.dmodel.closestAngle"],
+        "{mapping}.mapping.closest_angle" : ["{dmodel}.dmodel.closest_angle"],
+        "{dmodel}.dmodel.Move" : ["{mapping}.mapping.Move"],
+        "{dmodel}.dmodel.Move_Arg_0" : ["{mapping}.mapping.Move_Arg_0"],
+        "{dmodel}.dmodel.Move_Arg_1" : ["{mapping}.mapping.Move_Arg_1"]
+    },
+    "algorithm": {
+        "size": 0.5,
+        "type": "fixed-step"
+    }
+}

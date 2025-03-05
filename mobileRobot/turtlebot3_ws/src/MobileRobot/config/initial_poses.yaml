@@ -1,0 +1,30 @@
+0: {}  # Empty configuration
+1:
+  robot1:
+    x:  -2.56
+    y:   0.0
+    yaw: 0.0
+
+2:
+  robot1:
+    x:  -3.5
+    y:   1.0
+    yaw: 0.0
+  robot2:
+    x:  -3.5
+    y:  -1.0
+    yaw: 0.0
+
+3:
+  robot1:
+    x:  -3.5
+    y:   2.0
+    yaw: 0.0
+  robot2:
+    x:  -3.5
+    y:   0.0
+    yaw: 0.0
+  robot3:
+    x:  -3.5
+    y:  -2.0
+    yaw: 0.0

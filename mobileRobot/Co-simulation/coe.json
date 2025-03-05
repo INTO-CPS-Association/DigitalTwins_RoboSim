@@ -1,0 +1,9 @@
+{
+    "startTime": 0,
+    "endTime": 30.0,
+    "reportProgress": true,
+    "liveLogInterval": 0,
+    "logLevels": {},
+    "loggingOn": true,
+    "simulationProgramDelay": true
+}

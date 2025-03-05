@@ -1,0 +1,34 @@
+{
+    "fmus": {
+        "{mapping}": "../MappingFMU/mappingFMU.fmu",
+        "{dmodel}": "../dmodelFMU/dmodelFMU.fmu"
+    },
+    "logVariables": {
+        "{mapping}.mapping": [
+          "closestDistance",
+          "closestAngle",
+          "closest_distance",
+          "closest_angle"
+        ],
+        "{dmodel}.dmodel": [
+            "move",
+            "lv",
+            "av"
+        ]
+    },
+    "parameters": {
+    },
+    "connections": {
+        "{mapping}.mapping.closestDistance" : ["{dmodel}.dmodel.closestDistance"],
+        "{mapping}.mapping.closest_distance" : ["{dmodel}.dmodel.closest_distance"],
+        "{mapping}.mapping.closestAngle" : ["{dmodel}.dmodel.closestAngle"],
+        "{mapping}.mapping.closest_angle" : ["{dmodel}.dmodel.closest_angle"],
+        "{dmodel}.dmodel.move" : ["{mapping}.mapping.move"],
+        "{dmodel}.dmodel.lv" : ["{mapping}.mapping.lv"],
+        "{dmodel}.dmodel.av" : ["{mapping}.mapping.av"]
+    },
+    "algorithm": {
+        "size": 0.2,
+        "type": "fixed-step"
+    }
+}
