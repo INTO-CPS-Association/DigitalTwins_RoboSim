@@ -31,6 +31,10 @@ sudo apt install ros-humble-gazebo-*
  4) Co-simulation parameters such as step-size can be changed from _coe.json_ and _multimodel_normq.json_
    
 ## Models
+![OA_1SM](https://github.com/user-attachments/assets/6cf163a0-3786-43c5-9f76-f2b8e5a92fa1)
+
+![OA_Mapping](https://github.com/user-attachments/assets/ee6ec365-7dbc-41df-95f8-1629b219e5ee)
+
 
 ## Results
 
