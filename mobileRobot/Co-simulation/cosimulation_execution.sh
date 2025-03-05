@@ -3,7 +3,7 @@ echo "Executing Co-simulation experiment"
 echo "-----------------------------"
 echo "Specification"
 echo "-----------------------------"
-maestro_path=/home/arjun/installs # Change path accordingly
+maestro_path=$maestro_path # Change path accordingly
 maestro_jar=maestro-3.0.2-jar-with-dependencies.jar
 output_path=results # Change accordingly
 
