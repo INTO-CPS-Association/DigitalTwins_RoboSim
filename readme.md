@@ -9,19 +9,19 @@ We also provide [examples](#implementation-for-the-ur5eur3e) for the instantiati
 ## Installation
 0. Java and Python must be installed.
 1. Clone this repository.
-<pre>
+```bash
 git clone https://github.com/INTO-CPS-Association/DigitalTwins_RoboSim.git
-</pre>
+```
 2. Install CoppeliaSim:
   https://www.coppeliarobotics.com/
 3. Install ZeroMQ to communicate remotely with CoppeliaSim and the URInterface to communicate with the UR5e/UR3e:
-<pre>
+```bash
   python3 -m pip install coppeliasim-zmqremoteapi-client zmq urinterface
-</pre>
+```
 4. Install the additional dependencies for running and testing the examples and components - [Robotics Toolbox Python](https://github.com/petercorke/robotics-toolbox-python), pickle, [FMPy](https://github.com/CATIA-Systems/FMPy), mqtt, and pika (AMQP):
-<pre>
+```bash
   python3 -m pip install roboticstoolbox-python pickle fmpy paho-mqtt pika
-</pre>
+```
 
 ## External resources
 Some of the tools this approach relies on include:
