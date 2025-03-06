@@ -31,11 +31,12 @@ sudo apt install ros-humble-gazebo-*
  4) Co-simulation parameters such as step-size can be changed from _coe.json_ and _multimodel_normq.json_
    
 ## Models
+Below, the state machine of the d-model, describing the random walk and obstacle avoidance controller, is presented. The platform mapping model links this controller model to the sensors and actuators of the turtlebot3_burger.
 ![OA_1SM](https://github.com/user-attachments/assets/6cf163a0-3786-43c5-9f76-f2b8e5a92fa1)
 
 ![OA_Mapping](https://github.com/user-attachments/assets/ee6ec365-7dbc-41df-95f8-1629b219e5ee)
 
 
 ## Results
-
+The results of the co-simulation implementation, corresponding to the video above and as described in our paper, are presented below.
 ![MobileRobotOA_Results](https://github.com/user-attachments/assets/771e0ea4-cad8-4634-84c4-6623c8c40924)
