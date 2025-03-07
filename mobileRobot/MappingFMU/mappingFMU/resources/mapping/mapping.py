@@ -14,7 +14,7 @@ from threading import Thread
 '''***** Specific to the case study*****'''
 
 class Operation():
-
+    ## No need to update
     def __init__(self,name="",actions=[],**kwargs):
         self.name = name
         self.actions = actions
@@ -57,9 +57,8 @@ class Operation():
                 results_actions.append("")
         return results_actions
 
-
-
 class InputEvent():
+    ## No need to update
     def __init__(self,name="",equations=[],**kwargs):
         self.name = name
         self.equations = equations
@@ -69,14 +68,13 @@ class InputEvent():
         self.arguments = args
 
     def update_equations(self,equations):
-        self.equations = actions
+        self.equations = equations
 
     def add_arg(self,dict):
         for key,value in dict.items():
             self.arguments[key] = value
 
-    ## This method overwrites all the objects of the same class
-    def add_equation(self,action):
+    def add_equation(self,equation):
         self.equations.append(equation)
 
     def delete_equations(self):
@@ -111,8 +109,6 @@ class Mapping():
 
         '''Specific to the case study'''
 
-
-        '''These objects are to be initialized from the mapping generator'''
         '''Publishers : to send commands to the robot endpoint'''
         self.cmd = self.node.create_publisher(Twist, '/robot1/cmd_vel', 10)
 
@@ -138,19 +134,15 @@ class Mapping():
         self.closest_distance = 0.0
 
         '''Actions'''
-        ## Here the tricky part comes in
-        # The functions here should be assigned according to object type and simulation engine API
+        # Actions per operation defined in the RoboSim module
         actions_move = [self._set_robot_cmd]
 
         '''Equations'''
-        
-        #equations_closestAngle = [self._get_closest_angle]
-        #equations_closestDistance = [self._get_closest_distance]
+        # Equations per input event defined in the RoboSim module
         equations_closestAngle = [lambda: self._closestAngleEvent()]
-        #equations_closestDistance = [lambda: (abs(self.get_closest_distance())<self.MAX_RANGE) and (abs(self.get_closest_distance())>self.MIN_RANGE)]
         equations_closestDistance = [lambda: self._closestDistanceEvent()]
 
-        '''Initialization of services -> Operations and Input Events. This should be initialized automatically from the mapping generator'''
+        '''Initialization of services -> Operations and Input Events'''
         self.operations_list = []
         self.operations = types.SimpleNamespace() # To be refined with a proper dot notation
         self.operations.move = Operation(name="move",actions=actions_move)
@@ -200,7 +192,7 @@ class Mapping():
     def get_closest_distance(self):
         return self._get_closest_distance()
 
-    ### Specific to the remote interface - Update accordingly ###
+    ### Implementations - Update accordingly (specifically to the API of the robotic platform) ###
 
     '''ROS2 Implementations'''
     def _ROS_thread(self):
@@ -233,9 +225,6 @@ class Mapping():
         self.cmd.publish(msg)
 
     def _get_closest_angle(self):
-        #reset range of max of msg
-        # self.min_range = msg.range_min
-        # self.max_range = msg.range_max
         closest_distance = self.robot["scan"].range_max
         # Identify closest obstacle within the angle range of -120 to 120 degrees
         for angle_index, scan_range in enumerate(self.robot["scan"].ranges):
@@ -251,11 +240,7 @@ class Mapping():
         return self.closest_angle
     
     def _get_closest_distance(self):
-        #reset range of max of msg
-        # self.min_range = msg.range_min
-        # self.max_range = msg.range_max
         closest_distance = self.robot["scan"].range_max
-
         # Identify closest obstacle within the angle range of -120 to 120 degrees
         for angle_index, scan_range in enumerate(self.robot["scan"].ranges):
             # Convert the index to the corresponding angle in degrees
@@ -266,36 +251,6 @@ class Mapping():
                 if scan_range >= self.MIN_RANGE and scan_range < closest_distance and scan_range < self.MAX_RANGE:
                     self.closest_distance = scan_range                    
         return self.closest_distance
-
-    # def _get_closest_angle_recursive(self, index=0, closest_distance=None, closest_angle=None):
-    # """
-    # Preconditions:
-    # - self.robot["scan"].ranges is a list of float values representing distances.
-    # - self.robot["scan"].range_max is a valid float representing the max measurable range.
-    # - self.MIN_RANGE and self.MAX_RANGE are defined and valid.
-    
-    # Postconditions:
-    # - Returns the angle corresponding to the closest detected object within the valid range.
-    # - Ensures the closest distance is within self.MIN_RANGE and self.MAX_RANGE.
-    # """
-    # if closest_distance is None:
-    #     closest_distance = self.robot["scan"].range_max
-    #     closest_angle = None
-    
-    # # Base case: If we reach the end of the scan ranges
-    # if index >= len(self.robot["scan"].ranges):
-    #     return closest_angle
-
-    # scan_range = self.robot["scan"].ranges[index]
-    # angle = index if index <= 180 else index - 360
-
-    # if -150 <= angle <= 150:
-    #     if self.MIN_RANGE <= scan_range < closest_distance and scan_range < self.MAX_RANGE:
-    #         closest_distance = scan_range
-    #         closest_angle = angle
-
-    # return self._get_closest_angle_recursive(index + 1, closest_distance, closest_angle)
-
 
 
     '''Specific callbacks for ROS - update according to the subscribers'''
@@ -316,42 +271,34 @@ class Mapping():
         return True if s else False
 
 
+ ## How it works
 '''if __name__=='__main__':
-    mapping = Mapping()
+    # Instantiate an object of the parameterized platform mapping interface
+    mapping = Mapping(host="localhost",port=23000)
     try:
+        # Initialize the mapping interface
         mapping.start_mapping()
-        ## The args should come from the c++ code
-        # The args could also come as a dict of dicts (with the variable names)
-
-        result = mapping.get_event("moveCompleted",args=None)
-        print(result)
-
-
-        result = mapping.get_event("robotStopped",args=None)
-        print(result)
-
-        args = {
-            "equation_0": [0.1,28.0],
+        # Do something
+        ## Example input event
+        input_event_args = {
+            "equation_0": some_values_in_a_list,
             "equation_1": [0.1,20.0],
-            "equation_2": [0.1,14.0],
-            "equation_3": [0.1,7.0],
-            "equation_4": [0.1,4.0],
-            "equation_5": [0.1,2.5],
+            ...
         }
-        result = mapping.get_event("collision",args=args)
-        print(result)
+        result = mapping.get_event("some_input_event",args=input_event_args)
 
-        args = {
-            "action_0":[0],
+        ## Example operation
+        operation_args = {
+            "action_0":some_values_in_another_list,
             "action_1":[-3.1415/2],
-            "action_2":[-3.1415/2],
-            "action_3":[0],
-            "action_4":[0],
-            "action_5":[0]
+            ...
         }
-        mapping.execute_operation("movejoint",args=args)
-        time.sleep(5.0)
+        mapping.execute_operation("some_operation",args=operation_args)
+
+        ## Optional: loops
+
     finally:
+        # Stop the mapping interface
         mapping.stop_mapping()
-        print("Application stopped")
+        
 '''
