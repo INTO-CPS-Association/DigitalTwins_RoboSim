@@ -1,4 +1,9 @@
 ## Implementation for the UR3e
+
+https://github.com/user-attachments/assets/f1ecf7ba-c5d9-4e80-b201-b81112390a01
+
+
+
 ### Model artefacts
 The RoboSim models are available in the folders ```robosim_models```. More precisely, the ```p-model``` is contained in the file ```urxe_gripper.pm```, the ```d-model``` in the file ```urxe_gripper.rst```, and the ```platform mapping model``` in the file ```mapping.pm```. **Note:** Both UR5e and UR3e use the same platform mapping and d-model (stored in the `UR5e` folder). [RoboTool](https://robostar.cs.york.ac.uk/robotool/) is required to access the models using the Eclipse Modeling Framework.
 
