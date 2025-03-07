@@ -36,7 +36,7 @@ Some of the tools this approach relies on include:
 We provide the implementation of three examples below, with the general methodology outlined in the following **Templates** section of this readme.
 1. [UR3e](https://github.com/INTO-CPS-Association/DigitalTwins_RoboSim/tree/main/UR3e)
 2. [UR5e](https://github.com/INTO-CPS-Association/DigitalTwins_RoboSim/tree/main/UR5e)
-3. [Mobile Robot](https://github.com/INTO-CPS-Association/DigitalTwins_RoboSim/tree/main/mobileRobot)
+3. [Mobile Robot](https://github.com/INTO-CPS-Association/DigitalTwins_RoboSim/tree/main/mobileRobot) (this one has additional dependencies for ROS2 and Gazebo)
 
 ## Templates
 We provide templates based on the provided methodology in our paper (see [Cite this work](#cite-this-work)) in the [templates folder](templates/).
@@ -61,9 +61,9 @@ The script provides 11 functions that provide some portions of code for the foll
 
 
 ### Steps
-- **Steps 1 and 2** are case-specific. Refer to the examples provided in [UR5e/UR3e Models](#models) for further guidance.
+- **Steps 1 and 2** are case-specific. Refer to the examples provided in [UR5e/UR3e/MobileRobot](#implementation-of-examples) for further guidance.
 - **Step 3** refers to the platform mapping interface, whose template is provided in [mapping template](templates/step3_mapping/). Here, the user is expected create the mapping given the robotic platform and the communication interface and libraries required. For exemplification, refer to [mapping UR5e](UR5e/mapping/) to see the instantiation of the mapping template for the UR5e with two different interfaces, the CoppeliaSim Remote API and the URInterface.
-- **Step 4** is case-specific; be sure the simulation or real robotic platform is running and enabled for remote connection based on the communication interface provided in Step 3. Refer to the examples provided in [UR5e/UR3e Models](#p-model) for further guidance.
+- **Step 4** is case-specific; be sure the simulation or real robotic platform is running and enabled for remote connection based on the communication interface provided in Step 3. Refer to the examples provided in [UR5e/UR3e/MobileRobot](#implementation-of-examples) for further guidance.
 - **Step 5** is defined in the `co-simulation/multimodel.json` file ([co-simulation template](templates/step5_co-simulation/)) for the co-simulation and the distinct `ModelDescription.xml` files for each FMU. Use the feature **1** of `templates/helper.py` to get the connections between FMUs. The features **2, 4, and 11** also help to set up the `ModelDescription.xml` files that are used for the FMUs used in the co-simulation. For exemplification, refer to [co-simulation UR5e](UR5e/co-simulation/) to see the implementation of the co-simulation for the UR5e.
 - **Steps 6 and 7** are provided in the [mapping FMU template](templates/steps6-7_mappingFMU/). Use the features **2 and 3** of the `templates/helper.py` to set up the platform mapping FMU. When everything is done, use the provided script `templates/steps6-7_mappingFMU/wrap_fmu.sh` to wrap the platform mapping FMU with extension `.fmu`, including the worked-out **Step 3**. For exemplification, refer to [mapping FMU UR5e](UR5e/mapping/) to see the instantiation of the mapping FMU template for the UR5e.
 - **Step 8** is provided in the [d-model FMU template](templates/steps8-11_dmodelFMU/). Adapt the automatically generated C code in the `templates/steps8-11_dmodelFMU/adapted_C` folder using the guidance provided to adapt the `main.c` file. Update the `ModelDescription.xml` file using the feature **4** of the `templates/helper.py`.
@@ -76,6 +76,7 @@ For exemplification, refer to [d-model FMU](d-model/) to see the instantiation o
 ### Execution
 
 After these steps have been worked out, the co-simulation can be executed using the script `templates/step5_co-simulation/cosimulation_execution.sh`. For exemplification, refer to [co-simulation UR5e](UR5e/co-simulation/) to see the implementation of the co-simulation for the UR5e.
+The execution of the resulting co-simulation artifacts can also be done through the [TwinManager](https://github.com/sagilar/TwinManager). See [the UR5e implementation with the TwinManager](UR5e/TwinManager/).
 
 ## Cite this work
 TBD
