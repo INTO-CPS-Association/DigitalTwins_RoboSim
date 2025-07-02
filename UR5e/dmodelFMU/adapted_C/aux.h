@@ -23,9 +23,11 @@
 	} while (0)
 
 char* concat(char *str1, char *str2) {
-	char* result = (char*) malloc(sizeof(char)*(strlen(str1)+strlen(str2)));
-	strcpy(result, str1);
-	strcpy(result+strlen(str1), str2);
+	char* result = calloc((strlen(str1)+strlen(str2))+1,sizeof(char));
+	char* s1 = (char*)memcpy(result, str1, strlen(str1));
+	char* s2 = (char*)memcpy(result+strlen(str1), str2, strlen(str2)); //strcat(result, str2);
+    	free(str1);
+    	free(str2);
 	return result;
 }
 
