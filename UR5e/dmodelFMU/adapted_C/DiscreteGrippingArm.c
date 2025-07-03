@@ -114,6 +114,18 @@ void __clean__(__Infrastructure__* state) {
 
 	fclose(log_file);
 
+	free(start_DiscreteGrippingArm);
+	free(end_DiscreteGrippingArm);
+	free(start_cm);
+	free(end_cm);
+	free(start_sm);
+	free(end_sm);
+	free(state->control_channels);
+	free(state->mod_DiscreteGrippingArm_thread_channels);
+	free(state->ctrl_cm_thread_channels);
+	free(state->stm_sm_channels);
+	free(state);
+
 	return;
 }
 
