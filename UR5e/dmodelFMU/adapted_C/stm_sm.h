@@ -176,6 +176,8 @@ void *stm_sm(void *arg) {
 				char _s0[256];
 				sprintf(_s0, "%s", temp_);
 				fprintf(log_file, "DEBUG: %s\n", _s0);
+				fflush(log_file);
+				free(temp_);
 			}
 			ret = stm_sm_step(&state, &inputstate, &memorystate, end_sm);
 		}
@@ -232,7 +234,12 @@ char* print_sm_state(sm_state* state) {
 	temp1_ = print_STATES_sm(&(state)->state);
 	char* temp2_;
 	temp2_ = print_STATUS(&(state)->status);
-	return concat(concat(concat(temp1_, " ("), temp2_), ")");
+	char* aux1_ = concat(temp1_, " (");
+	char* aux2_ = concat(aux1_, temp2_);
+	char* aux3_ = concat(aux2_, ")");
+	free(aux1_);
+	free(aux2_);
+	return aux3_;
 }
 RESULT_Enum en_SimDiscreteGrippingArmMovement_ArmStop_1(sm_state* state, sm_inputstate* inputstate, sm_memory* memory, sm_output_Enum_Channel* output) {
 	{
