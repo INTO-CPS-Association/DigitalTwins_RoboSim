@@ -32,3 +32,7 @@ UR5e/controller/rmqfmu_old
 UR5e/controller/rmqfmu.fmu
 UR5e/controller/consumer_rmq.py
 
+## Specific to FMI3
+*.log
+fmi3/co-simulation/venv
+fmi3/co-simulation/venv/*

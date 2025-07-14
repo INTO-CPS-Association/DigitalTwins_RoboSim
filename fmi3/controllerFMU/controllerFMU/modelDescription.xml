@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<fmiModelDescription fmiVersion="3.0-beta.4" modelName="unifmu" instantiationToken="77236337-210e-4e9c-8f2c-c1a0677db21b" author="Yon Vanommeslaeghe" version="0.0.1" license="MIT" generationDateAndTime="2024-08-14T15:12:25Z" variableNamingConvention="flat" generationTool="unifmu">
+  <CoSimulation modelIdentifier="unifmu" needsExecutionTool="true" canBeInstantiatedOnlyOncePerProcess="false" canGetAndSetFMUState="true" canSerializeFMUState="true" canHandleVariableCommunicationStepSize="true" hasEventMode="true" />
+  <LogCategories>
+    <Category name="logStatusWarning" />
+    <Category name="logStatusDiscard" />
+    <Category name="logStatusError" />
+    <Category name="logStatusFatal" />
+    <Category name="logStatusPending" />
+    <Category name="logAll" />
+  </LogCategories>
+  
+  <ModelVariables>
+	<Float64 name="time" valueReference="999" causality="independent" variability="continuous" description="Simulation time"/>
+	<Clock name="closeGripperCommand" valueReference="4" causality="output" intervalVariability="triggered" />
+	<Clock name="openGripperCommand" valueReference="8" causality="output" intervalVariability="triggered" />
+	<Clock name="moveDiscreteCommand" valueReference="9" causality="output" intervalVariability="triggered" />
+	<Int32 name="MovementArgs_target_X" valueReference="10" causality="output" variability="discrete" initial="calculated" clocks="9"/>
+	<Int32 name="MovementArgs_target_Y" valueReference="11" causality="output" variability="discrete" initial="calculated" clocks="9"/>
+	<Int32 name="MovementArgs_target_Z" valueReference="12" causality="output" variability="discrete" initial="calculated" clocks="9"/>
+	<Float64 name="q0" valueReference="42" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="q1" valueReference="43" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="q2" valueReference="44" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="q3" valueReference="45" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="q4" valueReference="46" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="q5" valueReference="47" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qd0" valueReference="48" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qd1" valueReference="49" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qd2" valueReference="50" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qd3" valueReference="51" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qd4" valueReference="52" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qd5" valueReference="53" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qdd0" valueReference="54" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qdd1" valueReference="55" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qdd2" valueReference="56" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qdd3" valueReference="57" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qdd4" valueReference="58" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="qdd5" valueReference="59" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="t0" valueReference="60" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="t1" valueReference="61" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="t2" valueReference="62" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="t3" valueReference="63" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="t4" valueReference="64" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="t5" valueReference="65" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="x" valueReference="66" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="y" valueReference="67" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="z" valueReference="68" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="rx" valueReference="69" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="ry" valueReference="70" causality="input" variability="continuous" start="0.0" />
+	<Float64 name="rz" valueReference="71" causality="input" variability="continuous" start="0.0" />
+
+	<!-- For co-simulation with longer (repeated) routines -->
+	 <Boolean name="repeat_cycles" valueReference="100" causality="parameter" variability="fixed" start="false"/>
+  </ModelVariables>
+  <ModelStructure>
+	<Output valueReference="4" dependencies="" />
+	<Output valueReference="8" dependencies="" />
+	<Output valueReference="9" dependencies="" />
+	<Output valueReference="10" dependencies="9" />
+	<Output valueReference="11" dependencies="9" />
+	<Output valueReference="12" dependencies="9" />
+
+	<InitialUnknown valueReference="10" dependencies="" />
+	<InitialUnknown valueReference="11" dependencies="" />
+	<InitialUnknown valueReference="12" dependencies="" />
+
+  </ModelStructure>
+</fmiModelDescription>

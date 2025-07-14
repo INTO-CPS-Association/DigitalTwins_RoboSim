@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='utf-8'?>
+<fmiModelDescription fmiVersion="3.0-beta.4" modelName="unifmu" instantiationToken="77236337-210e-4e9c-8f2c-c1a0677db21b" author="Yon Vanommeslaeghe" version="0.0.1" license="MIT" generationDateAndTime="2024-08-14T15:12:25Z" variableNamingConvention="flat" generationTool="unifmu">
+  <CoSimulation modelIdentifier="unifmu" needsExecutionTool="true" canBeInstantiatedOnlyOncePerProcess="false" canGetAndSetFMUState="true" canSerializeFMUState="true" canHandleVariableCommunicationStepSize="true" hasEventMode="true" />
+  <LogCategories>
+    <Category name="logStatusWarning" />
+    <Category name="logStatusDiscard" />
+    <Category name="logStatusError" />
+    <Category name="logStatusFatal" />
+    <Category name="logStatusPending" />
+    <Category name="logAll" />
+  </LogCategories>
+  
+  <ModelVariables>
+	<Float64 name="time" valueReference="999" causality="independent" variability="continuous" description="Simulation time"/>
+	<Clock name="feasibleMoveDiscreteCommand" valueReference="0" causality="output" intervalVariability="triggered" />
+	<Clock name="robotStopped" valueReference="1" causality="output" intervalVariability="triggered" />
+	<Clock name="gripperOpened" valueReference="2" causality="output" intervalVariability="triggered" />
+	<Clock name="collision" valueReference="3" causality="output" intervalVariability="triggered" />
+	<Clock name="closeGripperCommand" valueReference="4" causality="input" intervalVariability="triggered" />
+	<Clock name="gripperClosed" valueReference="5" causality="output" intervalVariability="triggered" />
+	<Clock name="nonfeasibleMoveDiscreteCommand" valueReference="6" causality="output" intervalVariability="triggered" />
+	<Clock name="moveCompleted" valueReference="7" causality="output" intervalVariability="triggered" />
+	<Clock name="openGripperCommand" valueReference="8" causality="input" intervalVariability="triggered" />
+	<Clock name="moveDiscreteCommand" valueReference="9" causality="input" intervalVariability="triggered" />
+	<Int32 name="MovementArgs_target_X" valueReference="10" causality="input" variability="discrete" start="0" clocks="9"/>
+	<Int32 name="MovementArgs_target_Y" valueReference="11" causality="input" variability="discrete" start="0" clocks="9"/>
+	<Int32 name="MovementArgs_target_Z" valueReference="12" causality="input" variability="discrete" start="0" clocks="9"/>
+	<Clock name="movediscrete" valueReference="13" causality="input" intervalVariability="triggered" />
+	<Clock name="pick" valueReference="14" causality="input" intervalVariability="triggered" />
+	<Clock name="place" valueReference="15" causality="input" intervalVariability="triggered" />
+	<Int32 name="target_X" valueReference="16" causality="input" variability="discrete" start="0" clocks="13"/>
+	<Int32 name="target_Y" valueReference="17" causality="input" variability="discrete" start="0" clocks="13"/>
+	<Int32 name="target_Z" valueReference="18" causality="input" variability="discrete" start="0" clocks="13"/>
+	<Float64 name="closing_diameter" valueReference="19" causality="input" variability="continuous" start="0.0" clocks="14"/>
+	<Float64 name="closing_speed" valueReference="20" causality="input" variability="continuous" start="0.0" clocks="14"/>
+	<Float64 name="closing_force" valueReference="21" causality="input" variability="continuous" start="0.0" clocks="14"/>
+	<Float64 name="opening_diameter" valueReference="22" causality="input" variability="continuous" start="0.0" clocks="15"/>
+	<Float64 name="opening_speed" valueReference="23" causality="input" variability="continuous" start="0.0" clocks="15"/>
+	<Float64 name="opening_force" valueReference="24" causality="input" variability="continuous" start="0.0" clocks="15"/>
+	<Clock name="stop" valueReference="25" causality="input" intervalVariability="triggered" />
+	<Clock name="movejoint" valueReference="26" causality="input" intervalVariability="triggered" />
+	<Float64 name="target_q0" valueReference="27" causality="input" variability="continuous" start="0.0" clocks="26"/>
+	<Float64 name="target_q1" valueReference="28" causality="input" variability="continuous" start="0.0" clocks="26"/>
+	<Float64 name="target_q2" valueReference="29" causality="input" variability="continuous" start="0.0" clocks="26"/>
+	<Float64 name="target_q3" valueReference="30" causality="input" variability="continuous" start="0.0" clocks="26"/>
+	<Float64 name="target_q4" valueReference="31" causality="input" variability="continuous" start="0.0" clocks="26"/>
+	<Float64 name="target_q5" valueReference="32" causality="input" variability="continuous" start="0.0" clocks="26"/>
+	<Clock name="movecartesian" valueReference="33" causality="input" intervalVariability="triggered" />
+	<Float64 name="target_x" valueReference="34" causality="input" variability="continuous" start="0.0" clocks="33"/>
+	<Float64 name="target_y" valueReference="35" causality="input" variability="continuous" start="0.0" clocks="33"/>
+	<Float64 name="target_z" valueReference="36" causality="input" variability="continuous" start="0.0" clocks="33"/>
+	<Float64 name="target_rx" valueReference="37" causality="input" variability="continuous" start="0.0" clocks="33"/>
+	<Float64 name="target_ry" valueReference="38" causality="input" variability="continuous" start="0.0" clocks="33"/>
+	<Float64 name="target_rz" valueReference="39" causality="input" variability="continuous" start="0.0" clocks="33"/>
+	<Clock name="setvelocity" valueReference="40" causality="input" intervalVariability="triggered" />
+	<Float64 name="target_v" valueReference="41" causality="input" variability="continuous" start="0.0" clocks="40"/>
+	<Float64 name="q0" valueReference="42" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="q1" valueReference="43" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="q2" valueReference="44" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="q3" valueReference="45" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="q4" valueReference="46" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="q5" valueReference="47" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qd0" valueReference="48" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qd1" valueReference="49" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qd2" valueReference="50" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qd3" valueReference="51" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qd4" valueReference="52" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qd5" valueReference="53" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qdd0" valueReference="54" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qdd1" valueReference="55" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qdd2" valueReference="56" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qdd3" valueReference="57" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qdd4" valueReference="58" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="qdd5" valueReference="59" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="t0" valueReference="60" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="t1" valueReference="61" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="t2" valueReference="62" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="t3" valueReference="63" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="t4" valueReference="64" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="t5" valueReference="65" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="x" valueReference="66" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="y" valueReference="67" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="z" valueReference="68" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="rx" valueReference="69" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="ry" valueReference="70" causality="output" variability="continuous" initial="calculated" />
+	<Float64 name="rz" valueReference="71" causality="output" variability="continuous" initial="calculated" />
+  </ModelVariables>
+  <ModelStructure>
+	<Output valueReference="0" dependencies="" />
+	<Output valueReference="1" dependencies="" />
+	<Output valueReference="2" dependencies="" />
+	<Output valueReference="3" dependencies="" />
+	<Output valueReference="5" dependencies="" />
+	<Output valueReference="6" dependencies="" />
+	<Output valueReference="7" dependencies="" />
+	<Output valueReference="42" dependencies="" />
+	<Output valueReference="43" dependencies="" />
+	<Output valueReference="44" dependencies="" />
+	<Output valueReference="45" dependencies="" />
+	<Output valueReference="46" dependencies="" />
+	<Output valueReference="47" dependencies="" />
+	<Output valueReference="48" dependencies="" />
+	<Output valueReference="49" dependencies="" />
+	<Output valueReference="50" dependencies="" />
+	<Output valueReference="51" dependencies="" />
+	<Output valueReference="52" dependencies="" />
+	<Output valueReference="53" dependencies="" />
+	<Output valueReference="54" dependencies="" />
+	<Output valueReference="55" dependencies="" />
+	<Output valueReference="56" dependencies="" />
+	<Output valueReference="57" dependencies="" />
+	<Output valueReference="58" dependencies="" />
+	<Output valueReference="59" dependencies="" />
+	<Output valueReference="60" dependencies="" />
+	<Output valueReference="61" dependencies="" />
+	<Output valueReference="62" dependencies="" />
+	<Output valueReference="63" dependencies="" />
+	<Output valueReference="64" dependencies="" />
+	<Output valueReference="65" dependencies="" />
+	<Output valueReference="66" dependencies="" />
+	<Output valueReference="67" dependencies="" />
+	<Output valueReference="68" dependencies="" />
+	<Output valueReference="69" dependencies="" />
+	<Output valueReference="70" dependencies="" />
+	<Output valueReference="71" dependencies="" />
+
+	<InitialUnknown valueReference="0" dependencies="" />
+	<InitialUnknown valueReference="1" dependencies="" />
+	<InitialUnknown valueReference="2" dependencies="" />
+	<InitialUnknown valueReference="3" dependencies="" />
+	<InitialUnknown valueReference="5" dependencies="" />
+	<InitialUnknown valueReference="6" dependencies="" />
+	<InitialUnknown valueReference="7" dependencies="" />
+	<InitialUnknown valueReference="42" dependencies="" />
+	<InitialUnknown valueReference="43" dependencies="" />
+	<InitialUnknown valueReference="44" dependencies="" />
+	<InitialUnknown valueReference="45" dependencies="" />
+	<InitialUnknown valueReference="46" dependencies="" />
+	<InitialUnknown valueReference="47" dependencies="" />
+	<InitialUnknown valueReference="48" dependencies="" />
+	<InitialUnknown valueReference="49" dependencies="" />
+	<InitialUnknown valueReference="50" dependencies="" />
+	<InitialUnknown valueReference="51" dependencies="" />
+	<InitialUnknown valueReference="52" dependencies="" />
+	<InitialUnknown valueReference="53" dependencies="" />
+	<InitialUnknown valueReference="54" dependencies="" />
+	<InitialUnknown valueReference="55" dependencies="" />
+	<InitialUnknown valueReference="56" dependencies="" />
+	<InitialUnknown valueReference="57" dependencies="" />
+	<InitialUnknown valueReference="58" dependencies="" />
+	<InitialUnknown valueReference="59" dependencies="" />
+	<InitialUnknown valueReference="60" dependencies="" />
+	<InitialUnknown valueReference="61" dependencies="" />
+	<InitialUnknown valueReference="62" dependencies="" />
+	<InitialUnknown valueReference="63" dependencies="" />
+	<InitialUnknown valueReference="64" dependencies="" />
+	<InitialUnknown valueReference="65" dependencies="" />
+	<InitialUnknown valueReference="66" dependencies="" />
+	<InitialUnknown valueReference="67" dependencies="" />
+	<InitialUnknown valueReference="68" dependencies="" />
+	<InitialUnknown valueReference="69" dependencies="" />
+	<InitialUnknown valueReference="70" dependencies="" />
+	<InitialUnknown valueReference="71" dependencies="" />
+
+  </ModelStructure>
+</fmiModelDescription>
