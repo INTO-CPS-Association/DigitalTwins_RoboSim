@@ -4,7 +4,15 @@ This repository contains the [templates](#templates) for the technique to create
 
 We also provide [examples](#implementation-for-the-ur5eur3e) for the instantiation of the [templates](#templates) for the Universal Robots UR5e (see [here](UR5e/)) and the UR3e (see [here](UR3e/)). The UR5e belongs to a manufacturing cell, the [Flex-cell](https://github.com/INTO-CPS-Association/DTaaS-examples/tree/main/digital_twins/flex-cell), which has been used as a case study for Digital Twins in robotics. For these examples, we provide the implementations for simulation using [CoppeliaSim](https://github.com/CoppeliaRobotics) and for real robots using the [URInterface](https://gitlab.au.dk/clagms/urinterface), which is based on the [Universal Robots RTDE](https://github.com/UniversalRobots/RTDE_Python_Client_Library).
 
-
+## Table of Contents
+- [Installation](#installation).
+- [External resources](#external-resources).
+- [Implementation of examples](#implementation-of-examples).
+- [Templates](#templates).
+  - [Steps](#steps).
+  - [Execution](#execution).
+- [FMI3 support](#fmi3-support).
+- [Cite this work](#cite-this-work).
 
 ## Installation
 0. Java and Python must be installed.
@@ -78,5 +86,25 @@ For exemplification, refer to [d-model FMU](d-model/) to see the instantiation o
 After these steps have been worked out, the co-simulation can be executed using the script `templates/step5_co-simulation/cosimulation_execution.sh`. For exemplification, refer to [co-simulation UR5e](UR5e/co-simulation/) to see the implementation of the co-simulation for the UR5e.
 The execution of the resulting co-simulation artifacts can also be done through the [TwinManager](https://github.com/sagilar/TwinManager). See [the UR5e implementation with the TwinManager](UR5e/TwinManager/).
 
+## FMI3 Support
+The artifacts of this co-simulation framework have been extended to support FMI3. The underlying technologies use beta versions, therefore, expect to encounter some bugs when running FMI3 co-simulations.
+The artifacts are available for the [UR5e](UR5e/) example.
+More information is in the [fmi3 folder](fmi3/).
+
 ## Cite this work
-TBD
+**(preprint)**
+When citing the tool, please cite the following paper:
+
+GIL, SANTIAGO and Badyal, Arjun and Miyazawa, Alvaro and Larsen, Peter Gorm and Cavalcanti, Ana, A Model-Based Approach for Co-Simulation-Driven Digital Twins in Robotics. Available at SSRN: https://ssrn.com/abstract=5050127 or http://dx.doi.org/10.2139/ssrn.5050127
+
+Bibtex:
+
+```
+@article{Gil_robotics2024,
+  author       = {Gil, Santiago and Badyal, Arjun and Miyazawa, Alvaro and Larsen, Peter Gorm and Cavalcanti, Ana},
+  title        = {A Model-Based Approach for Co-Simulation-Driven Digital Twins in Robotics},
+  year         = {2024},
+  doi = {10.2139/ssrn.5050127},
+  url = {http://dx.doi.org/10.2139/ssrn.5050127} 
+}
+```
