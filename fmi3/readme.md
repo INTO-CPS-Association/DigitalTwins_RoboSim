@@ -2,6 +2,10 @@
 
 This folder provides an FMI3 implementation of the UR5e case study using [UniFMU](https://github.com/INTO-CPS-Association/unifmu) on its v0.12.0-beta, [FMI3 headers](https://github.com/modelica/fmi-standard), and a stand-alone co-simulation master algorithm.
 
+
+https://github.com/user-attachments/assets/c7a964cb-be9d-4be4-b14e-15d6e57f15c9
+
+
 ## Table of Contents
 - [Templates](#templates).
 - [Controller FMU and Platform Mapping FMU](#controller-fmu-and-platform-mapping-fmu).
