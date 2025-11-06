@@ -92,19 +92,23 @@ The artifacts are available for the [UR5e](UR5e/) example.
 More information is in the [fmi3 folder](fmi3/).
 
 ## Cite this work
-**(preprint)**
 When citing the tool, please cite the following paper:
 
-GIL, SANTIAGO and Badyal, Arjun and Miyazawa, Alvaro and Larsen, Peter Gorm and Cavalcanti, Ana, A Model-Based Approach for Co-Simulation-Driven Digital Twins in Robotics. Available at SSRN: https://ssrn.com/abstract=5050127 or http://dx.doi.org/10.2139/ssrn.5050127
+Gil, Santiago and Badyal, Arjun and Miyazawa, Alvaro and Larsen, Peter Gorm and Cavalcanti, Ana, "A Model-Based Approach for Co-Simulation-Driven Digital Twins in Robotics," Robotics and Autonomous Systems, vol. 196, p. 105240, 2026. Available: https://www.sciencedirect.com/science/article/pii/S0921889025003379.
 
 Bibtex:
 
 ```
-@article{Gil_robotics2024,
-  author       = {Gil, Santiago and Badyal, Arjun and Miyazawa, Alvaro and Larsen, Peter Gorm and Cavalcanti, Ana},
-  title        = {A Model-Based Approach for Co-Simulation-Driven Digital Twins in Robotics},
-  year         = {2024},
-  doi = {10.2139/ssrn.5050127},
-  url = {http://dx.doi.org/10.2139/ssrn.5050127} 
+@article{Gil&26,
+    title = {A model-based approach for co-simulation-driven digital twins in robotics},
+    journal = {Robotics and Autonomous Systems},
+    volume = {196},
+    pages = {105240},
+    year = {2026},
+    issn = {0921-8890},
+    doi = {10.1016/j.robot.2025.105240},
+    url = {https://www.sciencedirect.com/science/article/pii/S0921889025003379},
+    author = {Santiago Gil and Arjun Badyal and Alvaro Miyazawa and Peter Gorm Larsen and Ana Cavalcanti},
+    keywords = {Robotics, Co-simulation, Digital twin, Model-based engineering}
 }
 ```
